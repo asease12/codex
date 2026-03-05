@@ -69,6 +69,33 @@ h2 { font-size: 1rem; color: var(--accent); }
 
 .next-card canvas { display: block; margin-inline: auto; }
 
+
+.actions-card {
+  display: grid;
+  gap: 10px;
+}
+
+#restartButton {
+  appearance: none;
+  border: 1px solid #6f8fff;
+  background: linear-gradient(180deg, #6f8fff, #3d5fcc);
+  color: #f2f6ff;
+  border-radius: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 12px 10px;
+  cursor: pointer;
+  transition: transform 100ms ease, filter 140ms ease;
+}
+
+#restartButton:hover {
+  filter: brightness(1.06);
+}
+
+#restartButton:active {
+  transform: translateY(1px) scale(0.99);
+}
+
 .overlay {
   position: absolute;
   inset: 0;

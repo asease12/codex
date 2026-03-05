@@ -15,6 +15,7 @@ const next1Canvas = document.getElementById('next1');
 const next2Canvas = document.getElementById('next2');
 const next1Ctx = next1Canvas.getContext('2d');
 const next2Ctx = next2Canvas.getContext('2d');
+const restartButton = document.getElementById('restartButton');
 
 const state = {
   board: createBoard(),
@@ -254,6 +255,28 @@ function setGameOver() {
   overlay.classList.remove('hidden');
 }
 
+
+function resetGame() {
+  state.board = createBoard();
+  state.active = null;
+  state.queue = [];
+  state.score = 0;
+  state.chain = 0;
+  state.frame = 0;
+  state.softDrop = false;
+  state.paused = false;
+  state.gameOver = false;
+  state.settling = false;
+  state.settleFlash = 0;
+  state.clearEffect = [];
+
+  scoreEl.textContent = '0';
+  chainEl.textContent = '0';
+  overlay.classList.add('hidden');
+  refillQueue();
+  spawnPair();
+}
+
 function drawPuyo(context, px, py, colorIndex, alpha = 1) {
   const color = COLORS[colorIndex - 1];
   context.save();
@@ -404,8 +427,11 @@ window.addEventListener('keyup', (e) => {
   if (e.key === 'ArrowDown') state.softDrop = false;
 });
 
-refillQueue();
-spawnPair();
+restartButton.addEventListener('click', () => {
+  resetGame();
+});
+
+resetGame();
 render();
 requestAnimationFrame(loop);
 
